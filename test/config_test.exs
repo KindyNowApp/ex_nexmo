@@ -23,6 +23,6 @@ defmodule ConfigTest do
   end
 
   test "base_url config returns correct value" do
-    assert Config.base_url == "https://rest.nexmo.com/sms"
+    assert Config.base_url == "https://rest.nexmo.com/sms/json"
   end
 end
