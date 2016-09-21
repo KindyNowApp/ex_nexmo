@@ -18,11 +18,11 @@ defmodule ConfigTest do
     assert Config.api_secret == "test_secret"
   end
 
-  test "api_host config returns correct value" do
+  test "api_host config returns correct default value" do
     assert Config.api_host == "https://rest.nexmo.com"
   end
 
   test "base_url config returns correct value" do
-    assert Config.base_url == "https://rest.nexmo.com/sms"
+    assert Config.base_url == "https://rest.nexmo.com/sms/json"
   end
 end

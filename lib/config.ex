@@ -6,9 +6,9 @@ defmodule ExNexmo.Config do
   def api_key, do: Application.get_env(:ex_nexmo, :api_key)
   def api_secret, do: Application.get_env(:ex_nexmo, :api_secret)
 
-  def api_host, do: Application.get_env(:ex_nexm, :api_host) || "https://rest.nexmo.com"
+  def api_host, do: Application.get_env(:ex_nexmo, :api_host) || "https://rest.nexmo.com"
 
   def base_url do
-    api_host <> "/sms"
+    api_host <> "/sms/json"
   end
 end

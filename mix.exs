@@ -14,7 +14,7 @@ defmodule ExNexmo.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:logger, :httpoison]]
   end
 
   # Dependencies can be Hex packages:
@@ -28,7 +28,11 @@ defmodule ExNexmo.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
+      {:httpoison, "~> 0.9.0"},
+      {:poison, "~> 2.0"},
+
       # Dev/test dependencies
+      {:bypass, "~> 0.1", only: :test},
       {:mix_test_watch, "~> 0.2", only: [:dev]}
     ]
   end
