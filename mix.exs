@@ -1,35 +1,50 @@
 defmodule ExNexmo.Mixfile do
+
   use Mix.Project
 
   def project do
-    [app: :ex_nexmo,
-     version: "0.1.0",
-     elixir: "~> 1.3",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps()]
-  end
-
-  # Configuration for the OTP application
-  #
-  # Type "mix help compile.app" for more information
-  def application do
-    [applications: [:logger]]
-  end
-
-  # Dependencies can be Hex packages:
-  #
-  #   {:mydep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
-  #
-  # Type "mix help deps" for more examples and options
-  defp deps do
     [
-      # Dev/test dependencies
-      {:mix_test_watch, "~> 0.2", only: [:dev]}
+      app: :ex_nexmo,
+      version: "0.1.0",
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      deps: deps,
+      package: package,
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test],
+      description: "Elixir Nexmo API Client"
     ]
   end
+
+  def application do
+    [applications: [:logger, :httpoison],
+      mod: {ExNexmo, []}]
+  end
+
+  defp deps do
+    [
+      {:httpoison, "~> 0.8"},
+      {:poison, "~> 2.2"},
+      {:mix_test_watch, "~> 0.2", only: :dev},
+      {:excoveralls, "~> 0.5", only: :test},
+      {:earmark, "~> 0.2", only: :dev},
+      {:ex_doc, "~> 0.11", only: :dev},
+      {:dialyxir, "~> 0.3", only: :dev},
+      {:credo, "~> 0.3", only: :dev},
+      {:bypass, "~> 0.1", only: :test},
+      {:inch_ex, "~> 0.5", only: :docs},
+      {:bypass, "~> 0.1", only: :test},
+      {:dialyxir, "~> 0.3", only: :dev}
+    ]
+  end
+
+  defp package do
+    [
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      licenses: ["MIT"],
+      maintainers: ["Sina Karimi"],
+      links: %{"Github" => "https://github.com/sinakarimi/ex_nexmo"}
+    ]
+  end
+
 end
