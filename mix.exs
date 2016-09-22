@@ -33,8 +33,7 @@ defmodule ExNexmo.Mixfile do
       {:credo, "~> 0.3", only: :dev},
       {:bypass, "~> 0.1", only: :test},
       {:inch_ex, "~> 0.5", only: :docs},
-      {:bypass, "~> 0.1", only: :test},
-      {:dialyxir, "~> 0.3", only: :dev}
+      {:bypass, "~> 0.1", only: :test}
     ]
   end
 
