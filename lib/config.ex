@@ -17,7 +17,7 @@ defmodule ExNexmo.Config do
   @doc """
   Gets the Nexmo API host from the application config.
   """
-  def api_host, do: Application.get_env(:ex_nexmo, :api_host) || "https://rest.nexmo.com"
+  def api_host, do: Application.get_env(:ex_nexmo, :api_host, "https://rest.nexmo.com")
 
   @doc """
   Gets the base URL for the Nexmo SMS service.
