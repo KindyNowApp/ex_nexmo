@@ -28,7 +28,7 @@ defmodule ConfigTest do
     assert Config.api_secret == "test_secret"
   end
 
-  test "api_host config returns correct value" do
+  test "api_host config returns correct default value" do
     assert Config.api_host == "https://rest.nexmo.com"
   end
 
