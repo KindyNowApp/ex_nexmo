@@ -41,8 +41,8 @@ defmodule ExNexmo.Mixfile do
     [
       files: ["lib", "mix.exs", "README*", "LICENSE*"],
       licenses: ["MIT"],
-      maintainers: ["Sina Karimi"],
-      links: %{"Github" => "https://github.com/sinakarimi/ex_nexmo"}
+      maintainers: ["Craig Paterson", "Sina Karimi"],
+      links: %{"Github" => "https://github.com/KindyNowApp/ex_nexmo"}
     ]
   end
 
