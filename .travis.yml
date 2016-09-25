@@ -3,3 +3,5 @@ elixir:
   - 1.3.2
 otp_release:
   - 18.3
+env:
+  - NEXMO_API_KEY=fake_api_key NEXMO_API_SECRET=fake_api_secret
