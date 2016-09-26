@@ -17,8 +17,7 @@ defmodule ExNexmo.Mixfile do
   end
 
   def application do
-    [applications: [:logger, :httpoison],
-      mod: {ExNexmo, []}]
+    [applications: [:logger, :httpoison]]
   end
 
   defp deps do

@@ -1,7 +1,7 @@
 defmodule ExNexmo.SMS.Request do
 
   @moduledoc """
-  TODO
+  A request to the Nexmo SMS API.
   """
 
   alias __MODULE__

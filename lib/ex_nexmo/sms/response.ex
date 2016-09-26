@@ -1,7 +1,7 @@
 defmodule ExNexmo.SMS.Response do
 
   @moduledoc """
-  TODO
+  A response from the Nexmo SMS API.
   """
 
   alias __MODULE__
@@ -28,6 +28,7 @@ defmodule ExNexmo.SMS.Response do
     |> parse_messages
   end
 
+  @spec atomise_keys({atom, map}) :: map
   defp atomise_keys({:ok, response}) do
     Helper.atomise_keys(response)
   end
