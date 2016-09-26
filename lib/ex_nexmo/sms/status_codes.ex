@@ -7,6 +7,7 @@ defmodule ExNexmo.SMS.StatusCodes do
   @doc """
   Parses messge status codes into something meaningful.
   """
+  @spec parse_status_code(map) :: map
   def parse_status_code(%{status: status_code} = response) do
     %{
       "0" => :success,
