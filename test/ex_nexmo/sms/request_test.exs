@@ -3,7 +3,7 @@ ExUnit.start
 defmodule ExNexmo.SMS.RequestTest do
   use ExUnit.Case
 
-  alias ExNexmo.SMS.Request
+  alias ExNexmo.SMS.{Request, Response}
 
   setup do
     api_key = "key"
@@ -88,22 +88,6 @@ defmodule ExNexmo.SMS.RequestTest do
     }}
   end
 
-  test "builds valid JSON for an SMS request", %{
-    api_key: api_key,
-    api_secret: api_secret,
-    from: from,
-    to: to,
-    text: text
-  } do
-    assert Request.build_payload(from, to, text) == %{
-      api_key: api_key,
-      api_secret: api_secret,
-      to: to,
-      from: from,
-      text: text
-    }
-  end
-
   test "posts the request to Nexmo", %{
     from: from,
     to: to,
@@ -118,7 +102,7 @@ defmodule ExNexmo.SMS.RequestTest do
       assert {"content-type", "application/json; charset=utf-8"} in conn.req_headers
       Plug.Conn.resp(conn, 200, valid_single_message_response)
     end
-    {:ok, %{messages: [%{status: status}]}} = Request.send(from, to, text)
+    {:ok, %Response{messages: [%{status: status}]}} = Request.send(from, to, text)
     assert status == {:ok, :success}
   end
 
@@ -136,7 +120,7 @@ defmodule ExNexmo.SMS.RequestTest do
       assert {"content-type", "application/json; charset=utf-8"} in conn.req_headers
       Plug.Conn.resp(conn, 200, failed_single_message_response)
     end
-    {:ok, %{messages: [%{status: status}]}} = Request.send(from, to, text)
+    {:ok, %Response{messages: [%{status: status}]}} = Request.send(from, to, text)
     assert status == {:error, :internal_error}
   end
 
@@ -154,7 +138,7 @@ defmodule ExNexmo.SMS.RequestTest do
       assert {"content-type", "application/json; charset=utf-8"} in conn.req_headers
       Plug.Conn.resp(conn, 200, unknown_single_message_response)
     end
-    {:ok, %{messages: [%{status: status}]}} = Request.send(from, to, text)
+    {:ok, %Response{messages: [%{status: status}]}} = Request.send(from, to, text)
     assert status == {:error, :unknown}
   end
 
