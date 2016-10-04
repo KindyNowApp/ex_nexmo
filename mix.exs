@@ -5,7 +5,7 @@ defmodule ExNexmo.Mixfile do
   def project do
     [
       app: :ex_nexmo,
-      version: "0.1.0",
+      version: "0.1.1",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       deps: deps,
@@ -17,8 +17,7 @@ defmodule ExNexmo.Mixfile do
   end
 
   def application do
-    [applications: [:logger, :httpoison],
-      mod: {ExNexmo, []}]
+    [applications: [:logger, :httpoison]]
   end
 
   defp deps do
@@ -27,8 +26,8 @@ defmodule ExNexmo.Mixfile do
       {:poison, "~> 2.2"},
       {:mix_test_watch, "~> 0.2", only: :dev},
       {:excoveralls, "~> 0.5", only: :test},
-      {:earmark, "~> 0.2", only: :dev},
-      {:ex_doc, "~> 0.11", only: :dev},
+      {:earmark, "~> 1.0", only: :dev},
+      {:ex_doc, "~> 0.14", only: :dev},
       {:dialyxir, "~> 0.3", only: :dev},
       {:credo, "~> 0.3", only: :dev},
       {:bypass, "~> 0.1", only: :test},
