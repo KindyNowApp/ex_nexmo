@@ -15,7 +15,7 @@ defmodule ExNexmo.SMS.Response do
   @type t :: %__MODULE__{}
 
   @doc """
-  Parses a Nexmo SMS response
+  Parses a Nexmo SMS response.
   """
   @spec parse(String.t) :: map
   def parse(json_response) do

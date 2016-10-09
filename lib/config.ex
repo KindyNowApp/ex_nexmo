@@ -26,4 +26,9 @@ defmodule ExNexmo.Config do
     api_host <> "/sms/json"
   end
 
+  @doc """
+  Checks whether to use local preview.
+  """
+  def use_local, do: Application.get_env(:ex_nexmo, :use_local, false)
+
 end

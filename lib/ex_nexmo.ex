@@ -9,7 +9,15 @@ defmodule ExNexmo do
 
   ```elixir
   def deps do
-    [{:ex_nexmo, "~> 0.1.0"}]
+    [{:ex_nexmo, "~> 0.1"}]
+  end
+  ```
+
+  Add the `:ex_nexmo` application as your list of applications in `mix.exs`:
+
+  ```elixir
+  def application do
+    [applications: [:logger, :ex_nexmo]]
   end
   ```
 
@@ -24,11 +32,53 @@ defmodule ExNexmo do
   ```elixir
   ExNexmo.send_sms(from, to, message)
   ```
+
+  ## Message preview in the browser
+
+  ExNexmo includes a Plug that allows for preview of sent messages in the
+  browser. A sample of the required config is in `config/dev.exs`:
+
+  ```elixir
+  use Mix.Config
+
+  config :ex_nexmo, use_local: true
+  ```
+
+  Setting the `use_local` config option will cause messages to be stored locally
+  in-memory, allowing you to see what would have been sent to the recipient.
+
+  If you're using Phoenix, for example, you could use it like this:
+
+  ```elixir
+  # in web/router.ex
+  if Mix.env == :dev do
+    scope "/dev" do
+      pipe_through [:browser]
+      forward "/sms", Plug.ExNexmo.MessagePreview, [base_path: "/dev/sms"]
+    end
+  end
+  ```
   """
+
+  use Application
+  alias ExNexmo.Config
+  alias ExNexmo.SMS.{Request, Local}
+
+  def start(_, _) do
+    import Supervisor.Spec, warn: false
+
+    children = if Config.use_local do
+      [worker(Local, [])]
+    else
+      []
+    end
+    opts = [strategy: :one_for_one, name: ExNexmo.Supervisor]
+    Supervisor.start_link(children, opts)
+  end
 
   @spec send_sms(String.t, String.to, String.t) :: {atom, map}
   def send_sms(from, to, text) do
-    ExNexmo.SMS.Request.send(from, to, text)
+    Request.send(from, to, text)
   end
 
 end

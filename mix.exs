@@ -5,7 +5,7 @@ defmodule ExNexmo.Mixfile do
   def project do
     [
       app: :ex_nexmo,
-      version: "0.1.1",
+      version: "0.1.2",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
       deps: deps,
@@ -17,7 +17,8 @@ defmodule ExNexmo.Mixfile do
   end
 
   def application do
-    [applications: [:logger, :httpoison]]
+    [applications: [:logger, :httpoison],
+      mod: {ExNexmo, []}]
   end
 
   defp deps do

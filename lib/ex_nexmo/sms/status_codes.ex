@@ -1,7 +1,7 @@
 defmodule ExNexmo.SMS.StatusCodes do
 
   @moduledoc """
-  TODO
+  List of known Nexmo message status codes.
   """
 
   @doc """
