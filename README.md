@@ -1,5 +1,5 @@
 
-ex_nexmo
+ExNexmo
 ========
 [![Build Status](https://secure.travis-ci.org/kindynowapp/ex_nexmo.png?branch=master "Build Status")](http://travis-ci.org/kindynowapp/ex_nexmo)
 [![Coverage Status](https://coveralls.io/repos/kindynowapp/ex_nexmo/badge.svg?branch=master&service=github)](https://coveralls.io/github/kindynowapp/ex_nexmo?branch=master)
@@ -15,7 +15,15 @@ You can find the hex package [here](https://hex.pm/packages/ex_nexmo), and the d
 
 ```elixir
 def deps do
-  [{:ex_nexmo, "~> 0.1.1"}]
+  [{:ex_nexmo, "~> 0.1.2"}]
+end
+```
+
+Add the `:ex_nexmo` application as your list of applications in `mix.exs`:
+
+```elixir
+def application do
+  [applications: [:logger, :ex_nexmo]]
 end
 ```
 
@@ -30,4 +38,32 @@ Then sending a text message is as easy as:
 ```elixir
 ExNexmo.send_sms(from, to, message)
 ```
+
+## Message preview in the browser
+
+ExNexmo includes a Plug that allows for preview of sent messages in the
+browser. A sample of the required config is in `config/dev.exs`:
+
+```elixir
+use Mix.Config
+
+config :ex_nexmo, use_local: true
+```
+
+Setting the `use_local` config option will cause messages to be stored locally
+in-memory, allowing you to see what would have been sent to the recipient.
+
+If you're using Phoenix, for example, you could use it like this:
+
+```elixir
+# in web/router.ex
+if Mix.env == :dev do
+  scope "/dev" do
+    pipe_through [:browser]
+    forward "/sms", Plug.ExNexmo.MessagePreview, [base_path: "/dev/sms"]
+  end
+end
+```
+
+
 

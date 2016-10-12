@@ -6,10 +6,8 @@ defmodule ExNexmo.SMS.Request do
 
   alias __MODULE__
   alias ExNexmo.Config
-  alias ExNexmo.SMS.Response
+  alias ExNexmo.SMS.{Response, Nexmo, Local}
   import Poison, only: [encode: 1]
-
-  @headers [{"content-type", "application/json; charset=utf-8"}]
 
   defstruct api_key: nil,
     api_secret: nil,
@@ -47,7 +45,7 @@ defmodule ExNexmo.SMS.Request do
     request
     |> build_payload
     |> encode
-    |> post
+    |> deliver
   end
 
   @doc """
@@ -64,20 +62,18 @@ defmodule ExNexmo.SMS.Request do
 
   def build_payload(request), do: request
 
-  @spec post({atom, Request.t}) :: {atom, Response.t} | {atom, String.t}
-  defp post({:ok, payload}) do
-    Config.base_url
-    |> HTTPoison.post(payload, @headers)
-    |> handle_send_reponse
+  @spec deliver({atom, Request.t}) :: {atom, Response.t} | {atom, String.t}
+  defp deliver({:ok, payload}) do
+    adapter.deliver(payload)
   end
 
-  @spec handle_send_reponse({atom, HTTPoison.Response.t}) :: {atom, Response.t} | {atom, String.t}
-  defp handle_send_reponse({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
-    {:ok, Response.parse(body)}
-  end
-
-  defp handle_send_reponse({:error, %HTTPoison.Error{id: _id, reason: reason}}) do
-    {:error, reason}
+  @spec adapter :: atom
+  defp adapter do
+    if Config.use_local do
+      Local
+    else
+      Nexmo
+    end
   end
 
 end
