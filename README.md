@@ -15,7 +15,7 @@ You can find the hex package [here](https://hex.pm/packages/ex_nexmo), and the d
 
 ```elixir
 def deps do
-  [{:ex_nexmo, "~> 0.1"}]
+  [{:ex_nexmo, "~> 0.2.0"}]
 end
 ```
 
