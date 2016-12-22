@@ -46,8 +46,12 @@ if Code.ensure_loaded?(Plug) do
       URI.parse("#{conn.assigns.base_path}/#{path}").path
     end
 
-    defp render_recipient(recipient) do
+    defp render_recipient(recipient) when is_binary(recipient) do
       HTML.html_escape(recipient)
+    end
+
+    defp render_recipient(_) do
+      "None"
     end
 
   end
