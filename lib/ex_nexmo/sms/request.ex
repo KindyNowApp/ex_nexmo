@@ -64,7 +64,7 @@ defmodule ExNexmo.SMS.Request do
 
   @spec deliver({atom, Request.t}) :: {atom, Response.t} | {atom, String.t}
   defp deliver({:ok, payload}) do
-    adapter.deliver(payload)
+    adapter().deliver(payload)
   end
 
   @spec adapter :: atom

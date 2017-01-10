@@ -22,9 +22,7 @@ defmodule ExNexmo.Config do
   @doc """
   Gets the base URL for the Nexmo SMS service.
   """
-  def base_url do
-    api_host <> "/sms/json"
-  end
+  def base_url, do: api_host() <> "/sms/json"
 
   @doc """
   Checks whether to use local preview.
