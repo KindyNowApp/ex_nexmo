@@ -8,8 +8,8 @@ defmodule ExNexmo.Mixfile do
       version: "0.1.2",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env == :prod,
-      deps: deps,
-      package: package,
+      deps: deps(),
+      package: package(),
       test_coverage: [tool: ExCoveralls],
       preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test],
       description: "Elixir Nexmo API Client"
