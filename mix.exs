@@ -24,7 +24,7 @@ defmodule ExNexmo.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 0.8"},
-      {:poison, "~> 2.2 or ~> 3.0 or ~> 3.1"},
+      {:poison, "~> 2.0 or ~> 3.0"},
       {:mix_test_watch, "~> 0.2", only: :dev},
       {:excoveralls, "~> 0.5", only: :test},
       {:earmark, "~> 1.0", only: :dev},
