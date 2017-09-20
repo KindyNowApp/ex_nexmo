@@ -81,4 +81,9 @@ defmodule ExNexmo do
     Request.send(from, to, text)
   end
 
+  @spec send_sms(String.t, String.to) :: {atom, map}
+  def send_sms(to, text) do
+    Request.send(to, text)
+  end
+
 end

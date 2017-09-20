@@ -15,19 +15,19 @@ defmodule ExNexmo.SMS.Request do
     to: nil,
     text: nil,
     type: "text",
-    status_report_req: 0,
-    client_ref: nil,
-    vcard: nil,
-    vcal: nil,
-    ttl: nil,
-    callback: nil,
-    message_class: nil,
-    udh: nil,
-    protocol_id: nil,
-    body: nil,
-    title: nil,
-    url: nil,
-    validity: nil
+    # status_report_req: 0,
+    # client_ref: nil,
+    # vcard: nil,
+    # vcal: nil,
+    # tl: nil,
+    # callback: nil,
+    # message_class: nil,
+    # udh: nil,
+    # protocol_id: nil,
+    body: nil
+    # title: nil,
+    # url: nil,
+    # validity: nil
 
   @type t :: %__MODULE__{}
 
@@ -36,8 +36,12 @@ defmodule ExNexmo.SMS.Request do
   """
   @spec send(String.t, String.to, String.t) :: {atom, map}
   def send(from, to, text) do
-    %Request{from: from, to: to, text: text}
-    |> send
+    %Request{from: from, to: to, text: text} |> send
+  end
+
+  @spec send(String.to, String.t) :: {atom, map}
+  def send(to, text) do
+    %Request{to: to, text: text} |> send
   end
 
   @spec send(Request.t) :: {atom, map}
