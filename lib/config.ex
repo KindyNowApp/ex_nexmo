@@ -7,12 +7,12 @@ defmodule ExNexmo.Config do
   @doc """
   Gets the Nexmo API key from an environment variable.
   """
-  def api_key, do: System.get_env("NEXMO_API_KEY")
+  def api_key, do: Application.get_env(:ex_nexmo, :api_key, System.get_env("NEXMO_API_KEY"))
 
   @doc """
   Gets the Nexmo API secret from an environment variable.
   """
-  def api_secret, do: System.get_env("NEXMO_API_SECRET")
+  def api_secret, do: Application.get_env(:ex_nexmo, :api_secret, System.get_env("NEXMO_API_SECRET"))
 
   @doc """
   Gets the Nexmo API host from the application config.
