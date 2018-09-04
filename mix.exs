@@ -11,7 +11,7 @@ defmodule ExNexmo.Mixfile do
       deps: deps(),
       package: package(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test],
+      preferred_cli_env: [coveralls: :test, "coveralls.detail": :test, "coveralls.post": :test],
       description: "Elixir Nexmo API Client"
     ]
   end
